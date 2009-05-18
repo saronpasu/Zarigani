@@ -4,7 +4,7 @@ module Zarigani::Brain
   include Markov, TextParser
 
   def self.select(&block)
-    self.constants.map{|const|self.const_get(const)}.select{|const|block.call const}
+    self.constants.map{|const|self.const_get(const)}.select{|const|block.call const}.sort{|i,j|j::Priority<=>i::Priority}
   end
 
   def init_dict(source_logs)

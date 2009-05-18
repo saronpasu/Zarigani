@@ -2,6 +2,7 @@ class Zarigani::Brain::Response
   Behaviors = [
     :response
   ]
+  Priority = 40
 
   include Zarigani::Brain
   require 'zarigani/filter'
@@ -26,9 +27,9 @@ class Zarigani::Brain::Response
     source = select_source(lang)
     dict = init_dict(source)
     sep = lang == 'japanese' ? @sep_ja : @sep
+    # FIXME: キーワード抽出を実装しましょう
     keyword = get_keyword(input.text, sep)
     result = markov_chain(keyword, dict)
-    result ||= input.text
     if input.user.friends.empty?
       result = replace_to_user(result, input.user, @user_data)
     else

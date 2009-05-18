@@ -2,6 +2,7 @@ class Zarigani::Brain::TalkAbout
   Behaviors = [
     :talk_about
   ]
+  Priority = 20
 
   include Zarigani::Brain
 
@@ -23,9 +24,9 @@ class Zarigani::Brain::TalkAbout
     source = select_source(lang)
     dict = init_dict(source)
     sep = lang == 'japanese' ? @sep_ja : @sep
+    # FIXME: キーワード抽出を実装しましょう
     keyword = get_keyword(input.text, sep)
     result = markov_chain(keyword, dict)
-    result ||= input.text
     return result
   end
 end

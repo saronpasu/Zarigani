@@ -3,6 +3,8 @@ class Zarigani::Brain::TalkTo
     :talk_to
   ]
 
+  Priority = 30
+
   include Zarigani::Brain
   require 'zarigani/filter'
   include Zarigani::Filter
@@ -26,9 +28,9 @@ class Zarigani::Brain::TalkTo
     source = select_source(lang)
     dict = init_dict(source)
     sep = lang == 'japanese' ? @sep_ja : @sep
+    # FIXME: キーワード抽出を実装しましょう
     keyword = choice_keyword(source, sep)
     result = markov_chain(keyword, dict)
-    result ||= keyword
     if input.user.friends.empty?
       result = replace_to_user(result, input.user, @user_data)
     else

@@ -15,7 +15,7 @@ class Zarigani
     end
 
     def select_brain(input)
-      brain = nil
+      brains = nil
       case
         when (input.user and input.text)
           # response
@@ -25,7 +25,7 @@ class Zarigani
               (behavior === :any)
             }
           }
-          brain = brains[rand(brains.size)]
+          #brain = brains[rand(brains.size)]
         when input.user
           # talk to user
           brains = Brain.select{|brain|
@@ -34,7 +34,7 @@ class Zarigani
               (behavior == :any)
             }
           }
-          brain = brains[rand(brains.size)]
+          #brain = brains[rand(brains.size)]
         when input.text
           # talk about text
           brains = Brain.select{|brain|
@@ -43,7 +43,7 @@ class Zarigani
               (behavior == :any)
             }
           }
-          brain = brains[rand(brains.size)]
+          #brain = brains[rand(brains.size)]
         else
           # single talk
           brains = Zarigani::Brain.select{|brain|
@@ -51,14 +51,15 @@ class Zarigani
               (behavior == :any)
             }
           }
-          brain = brains[rand(brains.size)]
+          #brain = brains[rand(brains.size)]
       end
-      return brain
+      return brains
     end
 
+    # FIXME: プライオリティ順に発話を試行するようにする
     def talk(input)
-      brain_class = select_brain(input)
-      brain = brain_class.new(@config, @user_data, @sep_ja, @sep)
+      brains = select_brain(input)
+      brain = brains.first.new(@config, @user_data, @sep_ja, @sep)
       text = brain.talk(input)
       return text
     end

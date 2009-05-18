@@ -2,6 +2,7 @@ class Zarigani::Brain::Single
   Behaviors = [
     :any
   ]
+  Priority = 10
 
   include Zarigani::Brain
 
@@ -25,7 +26,6 @@ class Zarigani::Brain::Single
     sep = lang == 'japanese' ? @sep_ja : @sep
     keyword = choice_keyword(source, sep)
     result = markov_chain(keyword, dict)
-    result ||= keyword
     return result
   end
 end
