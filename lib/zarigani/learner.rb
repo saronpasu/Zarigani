@@ -45,6 +45,7 @@ class Zarigani
       return true
     end
 
+    # FIXME: 要リファクタリング 特にsrc.attr = value辺り Model.new do とか使って
     def learn(input)
       return nil if Model::Separator.count.zero?
       return nil unless input.text

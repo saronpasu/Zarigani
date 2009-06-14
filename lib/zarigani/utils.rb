@@ -1,5 +1,9 @@
 class Zarigani
   module Utils
+    def encoding_supported?
+      String.allocate.respond_to? :encoidng
+    end
+
     def load_config
       require 'yaml'
       config = open('config.yml', 'r'){|f|YAML::load(f.read)}
@@ -19,23 +23,23 @@ class Zarigani
       case type
         when :all
           sep = dataset.all
-          sep = sep.each{|s|s.word.force_encoding('UTF-8')} if RUBY_VERSION.match(/1\.9/)
+          sep = sep.each{|s|s.word.force_encoding('UTF-8')} if encoding_suppported?
         when :ja
           sep = dataset.filter(:language=>'japanese').limit(40).map{|s|
-            if RUBY_VERSION.match(/1\.9/) then
+            if encoding_supported? then
               s.word.force_encoding('UTF-8')
             else
               s.word
             end
-          }
+          }.uniq
         else
           sep = dataset.filter(:language=>nil).limit(40).map{|s|
-            if RUBY_VERSION.match(/1\.9/) then
+            if encoding_supported? then
               s.word.force_encoding('UTF-8')
             else
               s.word
             end
-          }
+          }.uniq
       end
       return sep
     end

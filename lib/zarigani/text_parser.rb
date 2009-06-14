@@ -2,8 +2,12 @@
 # -*- encoding: UTF-8 -*-
 
 module TextParser
+  def encoding_supported?
+    String.allocate.respond_to? :encoding
+  end
+
   def is_japanese?(text)
-    if RUBY_VERSION.match(/1\.9/) then
+    if encoding_supported? then
       reg = Regexp.compile("[^[:ascii:]]")
     else
       reg = Regexp.compile("[^[:alpha:][:digit:][:blank:][:punct:]]")

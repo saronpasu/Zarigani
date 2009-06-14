@@ -46,6 +46,7 @@ input.place.nameに一致する場所をとってくる
 
   def talk(input)
     lang = 'japanese' if is_japanese?(input.text)
+    input.lang = lang
     place_cond = select_place(input.place.name)
 $stdout.print([place_cond, "\n"])
     source = select_source(lang, place_cond) unless place_cond.nil?
@@ -54,7 +55,7 @@ $stdout.print([source.empty?, "\n"])
     dict = init_dict(source)
     sep = lang == 'japanese' ? @sep_ja : @sep
     # FIXME: キーワード抽出を実装しましょう
-    keyword = get_keyword(input.text, sep)
+    keyword = get_keyword(input, source)
     result = markov_chain(keyword, dict)
     if input.user.friends.empty?
       result = replace_to_user(result, input.user, @user_data)

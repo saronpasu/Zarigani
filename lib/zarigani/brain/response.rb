@@ -24,11 +24,12 @@ class Zarigani::Brain::Response
 
   def talk(input)
     lang = 'japanese' if is_japanese?(input.text)
+    input.lang = lang
     source = select_source(lang)
     dict = init_dict(source)
     sep = lang == 'japanese' ? @sep_ja : @sep
     # FIXME: キーワード抽出を実装しましょう
-    keyword = get_keyword(input.text, sep)
+    keyword = get_keyword(input, source)
     result = markov_chain(keyword, dict)
     if input.user.friends.empty?
       result = replace_to_user(result, input.user, @user_data)
