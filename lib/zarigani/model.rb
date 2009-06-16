@@ -1,3 +1,5 @@
+# FIXME: 見直す必要あり
+
 require 'zarigani/model/charactor'
 require 'zarigani/model/charactor/nickname'
 require 'zarigani/model/source_log'

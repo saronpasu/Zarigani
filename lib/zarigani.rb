@@ -18,11 +18,17 @@ class Zarigani
 
   attr_accessor :config, :db, :user_data
 
+=begin :rdoc:
+コアクラス。通常使わないことになるかも。
+=end
   def initialize
     @config = load_config
     @db = connect_db(@config[:db_path])
   end
 
+=begin :rdoc:
+コアからの発話。
+=end
   def talk(input)
     if input.text
       learner = Learner.new
@@ -34,6 +40,9 @@ class Zarigani
     return res
   end
 
+=begin :rdoc:
+コアからの学習。使わないかも。
+=end
   def learn(input)
     learner = Learner.new
     learner.traning(input.text)

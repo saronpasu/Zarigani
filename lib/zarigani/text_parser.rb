@@ -1,6 +1,18 @@
 #!ruby -Ku
 # -*- encoding: UTF-8 -*-
 
+=begin :rdoc:
+独自に作った文章解析モジュール。
+ざっくり説明すると、N-gram方式のパーサです。
+アンチMeCab。
+
+文章中に頻繁に登場する単語を区切り句(separator)として
+区切り句で単語を区切る。
+単語単位を１文字づつ広げながら探索し、ヒットしなくなった時点で
+単語単位を確定する。
+
+別途、ドキュメントつくります。
+=end
 module TextParser
   def encoding_supported?
     String.allocate.respond_to? :encoding
