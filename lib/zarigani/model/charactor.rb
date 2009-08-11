@@ -1,6 +1,7 @@
 class Zarigani
   module Model
     class Charactor < Sequel::Model
+      plugin :schema
       set_schema do
         primary_key :id
         String :unique_name

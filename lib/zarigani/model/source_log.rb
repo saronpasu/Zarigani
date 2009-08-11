@@ -1,6 +1,7 @@
 class Zarigani
   module Model
     class SourceLog < Sequel::Model
+      plugin :Schema
       set_schema do
         primary_key :id
         text :original_text

@@ -3,6 +3,7 @@ require 'zarigani/name_space'
 class Zarigani
   module Model
     class Place < Sequel::Model
+      plugin :Schema
       set_schema do
         primary_key :id
         String :name, :unique => true

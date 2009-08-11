@@ -1,6 +1,7 @@
 class Zarigani
   module Model
     class Separator < Sequel::Model
+      plugin :Schema
       set_schema do
         primary_key :id
         String :word

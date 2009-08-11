@@ -2,6 +2,7 @@ class Zarigani
   module Model
     class User
       class SameUser < Sequel::Model
+        plugin :Schema
         set_schema do
           foreign_key :user_id,
             :table => :users,

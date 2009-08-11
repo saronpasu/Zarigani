@@ -2,6 +2,7 @@ class Zarigani
   module Model
     class Charactor
       class Nickname < Sequel::Model
+        plugin :Schema
         set_schema do
           primary_key :id
           text :nickname
