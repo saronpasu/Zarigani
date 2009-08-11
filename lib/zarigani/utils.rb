@@ -1,4 +1,8 @@
 class Zarigani
+=begin :rdoc:
+ユーティリティたち。
+他のモジュールへ移すべきものがあれば、移管するかも。
+=end
   module Utils
     def encoding_supported?
       String.allocate.respond_to? :encoidng
@@ -17,7 +21,14 @@ class Zarigani
       return db
     end
 
+=begin :rdoc:
+DBから区切り句(separator)を取得する
+引数(type)の指定により、すべて取得(:all)か
+日本語のみ取得(:ja)か、日本語以外を取得(nil)になる
+デフォルトは日本語以外(nil)
+=end
     def init_separator(type = nil)
+	  # return nilではなく、例外処理に差し替える
       return nil if Model::Separator.count.zero?
       dataset = Model::Separator.order(:score.desc)
       case type
