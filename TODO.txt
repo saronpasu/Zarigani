@@ -1,0 +1,10 @@
+
+Zarigani::Brain::Baseを作って、brain/*.rbの無駄なコードを省く
+Zarigani::Talker#talk プライオリティ順に発話を試行するように作る
+Zarigani::Client::IRC_Client
+いろいろ詰め込みすぎ。Client::Base作るか、別モジュールに分ける
+SixamoTalker プラグイン作り直し
+script/*.rb の内容を一部、RakeTaskに移植
+もっとrdoc書く
+
+
